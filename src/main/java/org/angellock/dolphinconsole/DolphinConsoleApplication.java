@@ -1,5 +1,5 @@
 /*
- * DolphinBot - https://github.com/NeonAngelThreads/DolphinBot
+ * DolphinStudio - https://github.com/NeonAngelThreads/DolphinStudio
  * Copyright (C) 2025 NeonAngelThreads (https://github.com/NeonAngelThreads)
  *
  *    This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public

@@ -1,5 +1,5 @@
 /*
- * DolphinBot - https://github.com/NeonAngelThreads/DolphinBot
+ * DolphinStudio - https://github.com/NeonAngelThreads/DolphinStudio
  * Copyright (C) 2025 NeonAngelThreads (https://github.com/NeonAngelThreads)
  *
  *    This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public
@@ -16,7 +16,7 @@
 
 package org.angellock.dolphinconsole.controller;
 
-import org.angellock.dolphinconsole.service.DolphinBotApiService;
+import org.angellock.dolphinconsole.service.BotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +31,7 @@ import java.util.Map;
 public class BotController {
 
     @Autowired
-    private DolphinBotApiService botApiService;
+    private BotService botApiService;
 
     @GetMapping
     public ResponseEntity<?> getBots() {

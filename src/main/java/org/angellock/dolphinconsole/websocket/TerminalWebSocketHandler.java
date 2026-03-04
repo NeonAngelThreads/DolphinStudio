@@ -1,5 +1,5 @@
 /*
- * DolphinBot - https://github.com/NeonAngelThreads/DolphinBot
+ * DolphinStudio - https://github.com/NeonAngelThreads/DolphinStudio
  * Copyright (C) 2025 NeonAngelThreads (https://github.com/NeonAngelThreads)
  *
  *    This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public
@@ -18,7 +18,7 @@ package org.angellock.dolphinconsole.websocket;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import org.angellock.dolphinconsole.service.DolphinBotApiService;
+import org.angellock.dolphinconsole.service.BotService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -36,7 +36,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class TerminalWebSocketHandler extends TextWebSocketHandler {
 
     @Autowired
-    private DolphinBotApiService botApiService;
+    private BotService botApiService;
 
     private static final Gson gson = new Gson();
     private static final Map<String, WebSocketSession> sessions = new ConcurrentHashMap<>();

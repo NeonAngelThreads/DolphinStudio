@@ -1,5 +1,5 @@
 /*
- * DolphinBot - https://github.com/NeonAngelThreads/DolphinBot
+ * DolphinStudio - https://github.com/NeonAngelThreads/DolphinStudio
  * Copyright (C) 2025 NeonAngelThreads (https://github.com/NeonAngelThreads)
  *
  *    This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public
@@ -17,8 +17,6 @@
 package org.angellock.dolphinconsole.service;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import jakarta.annotation.PostConstruct;
 import okhttp3.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -27,38 +25,22 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
+
+import org.angellock.dolphinconsole.DolphinAPIService;
 
 @Service
-public class DolphinBotApiService {
+public class BotService extends DolphinAPIService{
 
-    @Value("${dolphinbot.api.url}")
-    private String apiBaseUrl;
-
-    @Value("${dolphinbot.api.timeout}")
-    private int timeout;
-
-    private OkHttpClient client;
-    private Gson gson = new Gson();
-    private static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
-
-    private static final Type type = new TypeToken<Map<String, Object>>(){}.getType();
-
-    @PostConstruct
-    public void init() {
-        client = new OkHttpClient.Builder()
-                .connectTimeout(timeout, TimeUnit.MILLISECONDS)
-                .readTimeout(timeout, TimeUnit.MILLISECONDS)
-                .writeTimeout(timeout, TimeUnit.MILLISECONDS)
-                .build();
-    }
+    private static final Gson gson = DolphinAPIService.getGson();
+    private static final MediaType JSON = DolphinAPIService.getJSON();
+    private static final Type type = DolphinAPIService.getType();
 
     public boolean isApiAvailable() {
         try {
             Request request = new Request.Builder()
                     .url(apiBaseUrl + "/health")
                     .build();
-            try (Response response = client.newCall(request).execute()) {
+            try (Response response = getClient().newCall(request).execute()) {
                 return response.isSuccessful();
             }
         } catch (IOException e) {
@@ -70,7 +52,7 @@ public class DolphinBotApiService {
         Request request = new Request.Builder()
                 .url(apiBaseUrl + "/bots")
                 .build();
-        try (Response response = client.newCall(request).execute()) {
+        try (Response response = getClient().newCall(request).execute()) {
             if (!response.isSuccessful()) {
                 throw new IOException("API request failed: " + response.code());
             }
@@ -88,7 +70,7 @@ public class DolphinBotApiService {
                 .url(apiBaseUrl + "/bots/start")
                 .post(body)
                 .build();
-        try (Response response = client.newCall(request).execute()) {
+        try (Response response = getClient().newCall(request).execute()) {
             return response.isSuccessful();
         }
     }
@@ -100,7 +82,7 @@ public class DolphinBotApiService {
                 .url(apiBaseUrl + "/bots/stop")
                 .post(body)
                 .build();
-        try (Response response = client.newCall(request).execute()) {
+        try (Response response = getClient().newCall(request).execute()) {
             return response.isSuccessful();
         }
     }
@@ -115,7 +97,7 @@ public class DolphinBotApiService {
                 .url(apiBaseUrl + "/bots/send-command")
                 .post(body)
                 .build();
-        try (Response response = client.newCall(request).execute()) {
+        try (Response response = getClient().newCall(request).execute()) {
             return response.isSuccessful();
         }
     }
@@ -127,7 +109,7 @@ public class DolphinBotApiService {
                 .post(body)
                 .build();
 
-        try (Response response = client.newCall(request).execute()) {
+        try (Response response = getClient().newCall(request).execute()) {
             return response.isSuccessful();
         }
     }
@@ -139,7 +121,7 @@ public class DolphinBotApiService {
                 .url(apiBaseUrl + "/bot/delete")
                 .post(body)
                 .build();
-        try (Response response = client.newCall(request).execute()) {
+        try (Response response = getClient().newCall(request).execute()) {
             return response.isSuccessful();
         }
     }
@@ -148,7 +130,7 @@ public class DolphinBotApiService {
         Request request = new Request.Builder()
                 .url(apiBaseUrl + "/bot/create")
                 .build();
-        try (Response response = client.newCall(request).execute()) {
+        try (Response response = getClient().newCall(request).execute()) {
             if (!response.isSuccessful()) {
                 throw new IOException("API request failed: " + response.code());
             }
