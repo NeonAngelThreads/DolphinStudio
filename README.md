@@ -121,27 +121,29 @@ dolphinbot.api.url=http://localhost:25560/api
 dolphinbot.api.timeout=5000
 ```
 
-> [!IMPORTANT] 系统要求
+> [!IMPORTANT]
+> 系统要求 
 > - Java 17+
 > - Maven 3.6+
 > - DolphinBot 核心程序运行中并开启 API 服务
-
+> 
 ## API 接口
 
 ### DolphinBot 核心 API
 原项目新增的 API 接口：
 
 
-| 端点                     | 方法 | 描述       |
-|------------------------|----------|----------|
-| `/api/health`          | GET | 健康检查     |
-| `/api/bots`            | GET | 列出所有机器人  |
-| `/api/bots/start`      | POST | 启动机器人    |
-| `/api/bots/stop`       | POST | 停止机器人    |
-| `/api/bots/send-command` | POST | 向机器人发送命令 |
-| `/api/config`          | GET/POST | 获取/更新配置  |
-| `/api/bot/create`      |   POST       | 创建新机器人   |
-| `/api/bot/delete`      |     POST         | 删除机器人       |
+| 端点                     | 方法       | 描述         |
+|------------------------|----------|------------|
+| `/api/health`          | GET      | 健康检查       |
+| `/api/bots`            | GET      | 列出所有机器人    |
+| `/api/bots/start`      | POST     | 启动机器人      |
+| `/api/bots/stop`       | POST     | 停止机器人      |
+| `/api/bots/send-command` | POST     | 向机器人发送命令   |
+| `/api/config`          | GET/POST | 获取/更新配置    |
+| `/api/bot/create`      | POST     | 创建新机器人     |
+| `/api/bot/delete`      | POST     | 删除机器人      |
+| `/api/server/players`      | GET/POST | 获取在线玩家皮肤列表 |
 
 
 ### Web Console API
@@ -167,19 +169,35 @@ web-console/
 │   │   │   └── org/
 │   │   │       └── angellock/
 │   │   │           └── dolphinconsole/
-│   │   │               ├── DolphinConsoleApplication.java  # 启动类
+│   │   │               ├── DolphinConsoleApplication.java      # 启动类
 │   │   │               ├── config/
-│   │   │               │   └── WebSocketConfig.java        # WebSocket配置
+│   │   │               │   └── WebSocketConfig.java            # WebSocket配置
 │   │   │               ├── controller/
-│   │   │               │   └── BotController.java          # REST API控制器
+│   │   │               │   └── BotController.java              # REST API控制器
 │   │   │               ├── service/
-│   │   │               │   └── DolphinBotApiService.java   # 核心API客户端
+│   │   │               │   └── DolphinBotApiService.java       # 核心API客户端
 │   │   │               └── websocket/
-│   │   │                   └── TerminalWebSocketHandler.java  # WebSocket处理器
+│   │   │                   └── TerminalWebSocketHandler.java   # WebSocket处理器
 │   │   └── resources/
 │   │       ├── static/
-│   │       │   └── index.html  # 前端页面
-│   │       ├── application.properties  # 配置文件
+│   │       │   └── css/
+│   │       │   │   └── styles.css                      
+│   │       │   └──default_skins/                       # 用于盗版玩家显示的离线默认皮肤
+│   │       │   │   ├── 015b8af09770d2d7.png
+│   │       │   │   ├── 64cf8da7dac26f7c.png
+│   │       │   │   ├── 069f740e11523d1d.png
+│   │       │   │   ├── 74a241cff2ecf0fa.png
+│   │       │   │   ├── 86d7625ab28b17c3.png
+│   │       │   │   ├── 1351a035a6921001.png
+│   │       │   │   └── b8c61cf07b087b66.png
+│   │       │   └── js/
+│   │       │   │   ├── app.js
+│   │       │   │   ├── modal-manager.js
+│   │       │   │   ├── notification-manager.js
+│   │       │   │   ├── tailwind.config.js
+│   │       │   │   └── terminal-manager.js
+│   │       │   └── index.html                          # 前端页面
+│   │       ├── application.properties                  # 配置文件
 │   │       └── templates/
 │   └── test/
 ├── pom.xml  # Maven依赖配置
